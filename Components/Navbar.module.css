@@ -1,0 +1,12 @@
+.navbar {
+    background-color: white;
+    background-size: auto 90%;
+    padding: .25rem;
+    position: sticky;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-radius: 10px;
+}
+    .image{
+        border-radius: 7%;
+    }

@@ -1,9 +1,6 @@
-.container {
-    background-image: url('../public/nyc.jpg');
-    background-position: top;
-    background-size: auto 72%;
-    background-repeat: no-repeat;
-    padding-top: 1%;
+.container{
+  padding-top: 1%;
+
 }
 
 .main {
