@@ -1,9 +1,10 @@
+
+
 .container {
-    width: 60%;
-    margin: auto;
-}
-
-.search {
-
+  width: 60%;
+  margin: auto;
+  background-color: white;
+  padding: 3%;
+  border-radius: 15px;
 }
 

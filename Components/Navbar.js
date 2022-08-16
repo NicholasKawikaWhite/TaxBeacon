@@ -2,9 +2,12 @@ import React from "react";
 import {Button, Navbar, Nav, Container} from 'react-bootstrap';
 import Image from 'next/image';
 import styles from "../Components/Navbar.module.css";
+import { useRouter } from "next/router";
 
 
-const Navigation = () => {
+const Navigation = (props) => {
+    const router = useRouter();
+
     return ( 
         <Navbar collapseOnSelect expand="lg" className={styles.navbar} sticky="top" bg="light">
           <Container>
@@ -27,9 +30,8 @@ const Navigation = () => {
             </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
-      <Button className={styles.signIn}>
-        Sign In
-      </Button>
+              {props.user ? <Button onClick={props.signOut}>Sign Out</Button>: <Button onClick={() => {router.push('/SignIn')}}>Sign In</Button>}
+
     </Navbar.Collapse>
           </Container>
         </Navbar>

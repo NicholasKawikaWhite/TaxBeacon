@@ -3,8 +3,25 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navigation from '../Components/Navbar'
 import Main from '../Components/MainConent'
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import {auth} from '../Components/firebaseConfig'
 
 export default function Home() {
+
+  const [user] = useAuthState(auth)
+
+  const signOutWithGoogle = () => {
+    signOut(auth)
+      .then(() => {
+        console.log(user);
+
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,7 +29,7 @@ export default function Home() {
         <meta name="description" content="Tax Beacon, Property tax services" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation/>
+      <Navigation signOut={signOutWithGoogle} user={user}/>
 
       <main className={styles.main}>
         <Main/>

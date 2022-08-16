@@ -1,11 +1,108 @@
+import React, {useState, useEffect} from 'react';
 import Image from "next/image";
 import styles from "../Components/Lookup.module.css";
 import Main from "../Components/MainConent";
 import { Form, Button } from "react-bootstrap";
+import { db } from './firebaseConfig';
+import {
+	getAuth,
+	GoogleAuthProvider,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+	signInWithPopup,
+	signOut,
+  } from "firebase/auth";
+import {
+	collection,
+	getDocs,
+	getFirestore,
+	addDoc,
+	serverTimestamp,
+	deleteDoc,
+  } from "firebase/firestore";
 
 const LookupForm = () => {
+	const [state, setState] = useState(null);
+	const [county, setCounty] = useState(null);
+	const [address, setAddress] = useState(null);
+	const [warning, setWarning] = useState(null);
+
+	const hi = async() => {
+		const querySnapshot = await getDocs(collection(db, "posts"));
+		console.log(querySnapshot);
+	}
+
+
+	const pushToDb = async() => {
+		try {
+			const docRef = await addDoc(collection(db, "searches"), {
+			  createdAt: serverTimestamp(),
+			  state: state,
+			  county: county,
+			  address: address,
+			});
+			console.log("Document written with ID: ", docRef.id);
+			setState(null);
+			setCounty(null);
+			setAddress(null);
+		  } catch (e) {
+			console.error("Error adding document: ", e);
+		  }
+	}
+
   return (
-      <div className={styles.container}>
+	  <div className={styles.mainContainer}>
+		  <div className={styles.container}>
+	<Form>
+	<Form.Group className="mb-3" controlId="validationCustom02">
+	  <Form.Label>State - Full Name</Form.Label>
+	  <Form.Control
+		type="State"
+		placeholder="Ex: Ohio"
+		value={state}
+		autoFocus
+		onChange={(e) => setState(e.target.value)}
+	  />
+	</Form.Group>
+	<Form.Group className="mb-3" controlId="validationCustom02">
+	  <Form.Label>County</Form.Label>
+	  <Form.Control
+		type="County"
+		value={county}
+		placeholder="Ex: Franklin"
+		onChange={(e) => setCounty(e.target.value)}
+	  />
+	</Form.Group>
+	<Form.Group className="mb-3" controlId="validationCustom02">
+	  <Form.Label>Address - Number and Street Only</Form.Label>
+	  <Form.Control
+		type="Address"
+		value={address}
+		placeholder="Ex: 77-8402 Joel ln."
+		onChange={(e) => setAddress(e.target.value)}
+	  />
+	</Form.Group>
+	{warning ? <p>One or more fields is incomplete!!</p> : <p></p>}
+	<Button
+          onClick={() => {
+            if(state != null && county != null && address != null){
+              setWarning(false);
+              pushToDb();
+            }else{
+              setWarning(true)
+            }
+
+          }}
+	>Submit</Button>
+  </Form>
+  </div>
+  </div>
+  );
+};
+
+export default LookupForm;
+
+{/* <div className={styles.container}>
     <Form>
       <fieldset>
         <Form.Group className="mb-3">
@@ -78,8 +175,4 @@ const LookupForm = () => {
         <Button className={styles.search} type="submit">Search</Button>
       </fieldset>
     </Form>
-    </div>
-  );
-};
-
-export default LookupForm;
+    </div> */}

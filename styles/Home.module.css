@@ -1,9 +1,12 @@
 .container {
-    background-image: url('../public/nyc.jpg');
+  background: url('../public/cloudCity.jpg') no-repeat top fixed;     
+  background-size: cover;
+    /* background-image: url('../public/cityWater.jpg');
+    background-attachment: fixed;
     background-position: top;
-    background-size: auto 72%;
-    background-repeat: no-repeat;
-    padding-top: 1%;
+    background-size: auto ;
+    background-repeat: no-repeat;*/
+    padding-top: 1%; 
 }
 
 .main {
