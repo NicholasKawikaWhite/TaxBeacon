@@ -26,6 +26,7 @@ const Navigation = (props) => {
               <Nav.Link className={styles.rightMargin} href="/contact">How It Works</Nav.Link>
               <Nav.Link className={styles.rightMargin} href="/contact">Pricing</Nav.Link>
               <Nav.Link className={styles.rightMargin} href="/contact">Contact Us</Nav.Link>
+              { props.user ? <Nav.Link className={styles.rightMargin} href="/dashboard">Dashboard</Nav.Link> : <></>}
 
             </Nav>
             </Navbar.Collapse>

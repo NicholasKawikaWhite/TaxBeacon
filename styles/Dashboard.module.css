@@ -1,0 +1,19 @@
+.container{
+    background: url('../public/cloudCity.jpg') no-repeat top fixed;     
+    background-size: cover;
+    height: 100vh;
+    padding-top: 1%;
+  }
+  .main {
+    width: 90%;
+    margin: auto;
+    padding: 1%;
+    background-color: white;
+    border-radius: 15px;
+  }
+  .title{
+      text-align: center;
+      margin-top: 5%;
+      margin-bottom: 3%;
+      font-size: 50px;
+  }

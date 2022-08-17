@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navigation from '../Components/Navbar'
 import Main from '../Components/MainConent'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import {auth} from '../Components/firebaseConfig'
 

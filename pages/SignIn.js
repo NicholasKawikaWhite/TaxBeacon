@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import styles from "../styles/SignIn.module.css";
 import { GoogleButton } from "react-google-button";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth } from "../Components/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -23,7 +23,6 @@ const SignIn = (props) => {
 
   const provider = new GoogleAuthProvider();
   const SignInWithGoogle = () => {
-    console.log('We made it')
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -36,7 +35,7 @@ const SignIn = (props) => {
         const errorMessage = error.message;
         const email = error.customData.email;
         const credential = GoogleAuthProvider.credentialFromError(error);
-      });
+      })
   };
 
   function signInRegular() {

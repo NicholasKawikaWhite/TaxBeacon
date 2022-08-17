@@ -20,12 +20,18 @@ import {
 	serverTimestamp,
 	deleteDoc,
   } from "firebase/firestore";
+  import { useRouter } from 'next/router';
+import { userAgentFromString } from 'next/server';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebaseConfig';
 
 const LookupForm = () => {
 	const [state, setState] = useState(null);
 	const [county, setCounty] = useState(null);
 	const [address, setAddress] = useState(null);
 	const [warning, setWarning] = useState(null);
+	const router = useRouter();
+	const [user] = useAuthState(auth);
 
 	const hi = async() => {
 		const querySnapshot = await getDocs(collection(db, "posts"));
@@ -40,6 +46,7 @@ const LookupForm = () => {
 			  state: state,
 			  county: county,
 			  address: address,
+			  uid: user.uid,
 			});
 			console.log("Document written with ID: ", docRef.id);
 			setState(null);
@@ -88,6 +95,7 @@ const LookupForm = () => {
             if(state != null && county != null && address != null){
               setWarning(false);
               pushToDb();
+			  router.push('/dashboard')
             }else{
               setWarning(true)
             }
